@@ -50,6 +50,7 @@ def main():
     # print(test.test_req)
     print(f.__name__)
     print(f.__doc__)
+    f(2)
 
 
 if __name__ == '__main__':

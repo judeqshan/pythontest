@@ -33,3 +33,4 @@ class Calc:
 mycal = Calc()
 print(mycal.add(2, 3))
 print(mycal.mul(5, 2))
+

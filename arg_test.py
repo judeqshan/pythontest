@@ -57,6 +57,8 @@ def main():
     is a thin wrapper around execute() so that we can do some final error handling
 
     """
+    for i in range(1,5):
+        print(i)
     try:
 
         sys.exit(execute())

@@ -100,4 +100,5 @@ class User:
         print("test")
 
 u = User("jude")
-print(u("User"))
+# print(u("User"))
+u1 = User("tom")

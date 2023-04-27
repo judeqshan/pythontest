@@ -1,41 +1,86 @@
-import numpy as np
+# importing various libraries
+import sys
+from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
+import random
 
+class MyNavigationToolbar(NavigationToolbar):
+    # only display the buttons we need
+    toolitems = [t for t in NavigationToolbar.toolitems if
+                 t[0] in ('Home', 'Pan', 'Zoom', 'Save')]
 
-data = {'Barton LLC': 109438.50,
-        'Frami, Hills and Schmidt': 103569.59,
-        'Fritsch, Russel and Anderson': 112214.71,
-        'Jerde-Hilpert': 112591.43,
-        'Keeling LLC': 100934.30,
-        'Koepp Ltd': 103660.54,
-        'Kulas Inc': 137351.96,
-        'Trantow-Barrows': 123381.38,
-        'White-Trantow': 135841.99,
-        'Will LLC': 104437.60}
-group_data = list(data.values())
-group_names = list(data.keys())
-group_mean = np.mean(group_data)
+# main window
+# which inherits QDialog
+class Window(QDialog):
+	
+	# constructor
+	def __init__(self, parent=None):
+		super(Window, self).__init__(parent)
 
-fig, ax = plt.subplots(figsize=(8, 8))
-ax.barh(group_names, group_data)
-labels = ax.get_xticklabels()
-plt.setp(labels, rotation=45, horizontalalignment='right')
+		# a figure instance to plot on
+		self.figure = plt.figure()
 
-# Add a vertical line, here we set the style in the function call
-ax.axvline(group_mean, ls='--', color='r')
+		# this is the Canvas Widget that
+		# displays the 'figure'it takes the
+		# 'figure' instance as a parameter to __init__
+		self.canvas = FigureCanvas(self.figure)
 
-# Annotate new companies
-for group in [3, 5, 8]:
-    ax.text(145000, group, "New Company", fontsize=10,
-            verticalalignment="center")
+		# this is the Navigation widget
+		# it takes the Canvas widget and a parent
+		self.toolbar = MyNavigationToolbar(self.canvas, self)
 
-# Now we move our title up since it's getting a little cramped
-ax.title.set(y=1.05)
+		# Just some button connected to 'plot' method
+		self.button = QPushButton('Plot')
+		
+		# adding action to the button
+		self.button.clicked.connect(self.plot)
 
-ax.set(xlim=[-10000, 140000], xlabel='Total Revenue', ylabel='Company',
-       title='Company Revenue')
-ax.xaxis.set_major_formatter(currency)
-ax.set_xticks([0, 25e3, 50e3, 75e3, 100e3, 125e3])
-fig.subplots_adjust(right=.1)
+		# creating a Vertical Box layout
+		layout = QVBoxLayout()
+		
+		# adding tool bar to the layout
+		layout.addWidget(self.toolbar)
+		
+		# adding canvas to the layout
+		layout.addWidget(self.canvas)
+		
+		# adding push button to the layout
+		layout.addWidget(self.button)
+		
+		# setting layout to the main window
+		self.setLayout(layout)
 
-plt.show()
+	# action called by the push button
+	def plot(self):
+		
+		# random data
+		data = [random.random() for i in range(10)]
+
+		# clearing old figure
+		self.figure.clear()
+
+		# create an axis
+		ax = self.figure.add_subplot(111)
+
+		# plot data
+		ax.plot(data, '*-')
+
+		# refresh canvas
+		self.canvas.draw()
+
+# driver code
+if __name__ == '__main__':
+	
+	# creating apyqt5 application
+	app = QApplication(sys.argv)
+
+	# creating a window object
+	main = Window()
+	
+	# showing the window
+	main.show()
+
+	# loop
+	sys.exit(app.exec_())

@@ -51,7 +51,7 @@ def main():
     print(f.__name__)
     print(f.__doc__)
     f(2)
-
+    foo("test")
 
 if __name__ == '__main__':
     main()

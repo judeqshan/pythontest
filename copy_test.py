@@ -15,7 +15,7 @@ print("idc = ",id(c))
 print("idd = ",id(d))
 
 # b.append(4)
-d.append(4)
+a.append([1,2])
 
 print("a = ",a)
 print("b = ",b)

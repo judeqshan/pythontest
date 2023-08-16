@@ -1,4 +1,5 @@
-from pfile12 import person
+from file1.pfile12 import person
+from file1.file1_1.pfile1_1 import pfile1_1
 
 class EmployeePfile1(person):
    '所有员工的基类'

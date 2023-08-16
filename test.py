@@ -8,3 +8,6 @@ with open('test_suit.py', 'r') as f:
         
         # print(line)
         pass
+
+for letter in range(97, 123):
+    print(chr(letter))

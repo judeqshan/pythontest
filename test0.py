@@ -17,3 +17,6 @@ for i in range(1, l):
     print("1/%d "%(tmp), end="")
 
 print(sum)
+
+for letter in range(97, 123):
+    print(chr(letter))

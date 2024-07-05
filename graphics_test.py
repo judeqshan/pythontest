@@ -41,7 +41,7 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "确定"))
         self.pushButton_2.setText(_translate("MainWindow", "确定"))
         
-import et
+# import et
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QApplication,QMainWindow,QMessageBox
 import sys

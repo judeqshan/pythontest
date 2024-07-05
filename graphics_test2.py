@@ -76,6 +76,7 @@ class CustomItem(QtWidgets.QGraphicsItem):
         self.controls = []
 
         for onLeft, create in enumerate((right, left)):
+            print(onLeft, create)
             if create:
                 control = ControlPoint(self, onLeft)
                 self.controls.append(control)

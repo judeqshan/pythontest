@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OrgChart Example</title>
+    <!-- 引入 orgchart.js -->
+    <script src="orgchart.js"></script>
+    <!-- 如果有 CSS 文件，也在这里引入 -->
+    <link rel="stylesheet" href="org_chart_test.css">
+</head>
+<body>
+    <!-- 用于显示组织图的容器 -->
+    <div id="tree"></div>
+
+    <script>
+
+        let chart = new OrgChart("#tree", {
+            // options
+            nodeBinding: {
+                field_0: "name"
+            },
+            nodes: [
+                { id: 1, name: "Amber McKenzie" },
+                { id: 2, pid: 1, name: "Ava Field" },
+                { id: 3, pid: 1, name: "Peter Stevens" }
+            ]  
+        });
+    
+     
+    
+    </script>
+</body>
+
